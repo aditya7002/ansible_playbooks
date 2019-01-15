@@ -1,0 +1,13 @@
+# Playbook to remove apache
+#
+---
+
+- hosts:  all
+  user: ansadm
+  become: yes
+  become_method: sudo
+
+  tasks:
+
+  - name: 1. Remove apache(httpd)
+    yum: name=httpd state=absent 

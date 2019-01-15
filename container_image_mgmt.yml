@@ -1,0 +1,23 @@
+# Playbook for docker container image management
+#
+---
+
+- hosts: all
+  user: ansadm
+  become: yes
+  become_method: sudo
+
+  tasks:
+
+  - name: 1. Delete nginx customized docker image from local repository
+    docker_image: name=aditya7002/nginxnewimage state=absent
+    tags: delete_nginx_customized_image
+
+  - name: 2. Create or pull docker image from docker hub
+    docker_image: name=aditya7002/nginxnewimage
+    #repository: aditya7002/nginxnewimage:latest state=present
+    tags: pull_customized_image
+
+  - name: 1. Delete nginx docker image from local repository
+    docker_image: name=nginx state=absent
+    tags: delete_nginx_image

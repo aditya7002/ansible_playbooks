@@ -1,0 +1,34 @@
+# Container management playbook 
+#
+---
+
+- hosts: all
+  user: ansadm
+  become: yes
+  become_method: sudo
+
+  tasks:
+
+  # Create, Start and stop original nginx image container
+
+  - name: 1. Stop a nginx docker container
+    docker_container: name=brave_lamport published_ports=8080:80 image=nginx state=stopped
+    tags: stop
+
+  - name: 2. Create and Start a nginx docker container
+    docker_container: name=brave_lamport published_ports=8080:80 image=nginx state=started
+    tags: start
+
+  # Stop & start nginx customized container
+  - name: 3. Create and Start customized nginx container
+    docker_container: name=nginxnew published_ports=8282:82 image=aditya7002/nginxnewimage state=started
+    tags: custom_start
+
+  - name: 4. Stop nginx customized container
+    docker_container: name=nginxnew published_ports=8282:82 image=aditya7002/nginxnewimage state=stopped
+    tags: custom_stop
+
+  # Delete a container
+  - name: 5. Delete customized nginx container
+    docker_container: name=nginxnew published_ports=8282:82 image=aditya7002/nginxnewimage state=absent
+    tags: custom_delete

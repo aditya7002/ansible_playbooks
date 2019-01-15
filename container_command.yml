@@ -1,0 +1,22 @@
+# Playbooks to execute commands inside container
+#
+---
+
+- hosts: all
+  user: ansadm
+  become: yes
+  become_method: sudo
+  vars: 
+    container_name: nginxnew
+    image_name: nginx
+
+  tasks:
+
+  - name: 1. Pull nginx image, create nginx docker container from docker hub & start container
+    docker_container: name={{container_name}} image={{image_name}} published_ports=8080:80 state=started
+    tags: pull_custom_image
+
+  - name: 2. Update docker container
+    check_mode: no
+    command: docker exec {{container_name}} bash -l -c 'apt-get update;apt-get install vim -y'
+    tags: update_container

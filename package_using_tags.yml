@@ -1,0 +1,19 @@
+# Install apache & epel packages using tags
+
+---
+
+- hosts: all
+  user: ansadm
+  become: yes
+  become_method: sudo
+
+  tasks:
+  
+  - name: 1. Install httpd
+    yum: name=httpd state=present
+    tags: apache
+
+  - name: 2. Install epel
+    yum: name=epel-release state=present
+    tags: epel
+  

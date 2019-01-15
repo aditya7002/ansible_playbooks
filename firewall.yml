@@ -1,0 +1,11 @@
+---
+
+- hosts: all
+  user: ansadm
+  become: yes
+  become_method: sudo
+
+  tasks:
+
+  - name: 1. Stop firewalld 
+    service: name=firewalld state=stopped
