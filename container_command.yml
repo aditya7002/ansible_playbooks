@@ -8,7 +8,12 @@
   become_method: sudo
   vars: 
     container_name: nginxnew
+    new_container_name: nginxdummyimage
     image_name: nginx
+    new_image_name: aditya7002/nginxnewimage
+    nginx_new_port: 87
+    message: "Changing nginx conf"
+    user_name: "Aditya Datta"
 
   tasks:
 
@@ -20,3 +25,30 @@
     check_mode: no
     command: docker exec {{container_name}} bash -l -c 'apt-get update;apt-get install vim -y'
     tags: update_container
+
+  - name: 3. Change the server port of nginx from port 80 to port 84 & copy it locally on docker host machine
+    template:
+         src: /home/ansadm/ansible_playbooks/template_files/default.conf
+         dest: /home/ansadm/test
+    tags: modify_nginx_conf
+
+  - name: 4. Update the container with the new nginx.conf file
+    check_mode: no
+    command: docker cp /home/ansadm/test/default.conf nginxnew:/etc/nginx/conf.d/
+    tags: update_conf
+
+  - name: 5. Commit the changes made in the container
+    check_mode: no
+    command: docker commit -m "Changing nginx conf" -a "Aditya Datta" {{container_name}} {{image_name}}
+    tags: commit_conf
+
+  - name: 6. Restart new nginx docker container with updated default.conf file
+    docker_container:
+                name={{ container_name }}
+                image={{image_name}}
+                published_ports=8282:{{nginx_new_port}}
+                state=started
+                restart=yes
+    tags: restart_nginx
+  
+                
