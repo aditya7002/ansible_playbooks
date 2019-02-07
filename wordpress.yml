@@ -1,0 +1,12 @@
+
+--- 
+
+- hosts: all
+  user: ansadm
+  become: yes
+  become_method: sudo
+
+  tasks:
+
+  - name: 1. Install Apache (httpd)
+    yum: name=httpd state=present
