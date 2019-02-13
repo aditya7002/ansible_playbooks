@@ -10,6 +10,8 @@
 
   - name: 1. Install Apache (httpd)
     yum: name=httpd state=present
+    tags: install_apache
 
   - name: 2. Start httpd service
     service: name=httpd state=started
+    tags: start_httpd
