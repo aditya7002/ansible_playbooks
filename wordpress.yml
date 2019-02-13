@@ -13,5 +13,6 @@
     tags: install_apache
 
   - name: 2. Start httpd service
-    service: name=httpd state=started
+    service: name=httpd state=started enabled=yes
     tags: start_httpd
+
