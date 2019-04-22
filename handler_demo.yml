@@ -1,0 +1,17 @@
+
+
+---
+
+- hosts: all
+  user: ansadm
+  roles:
+     - webservers
+  become: yes
+  become_method: sudo
+
+  tasks:
+
+  - name: 1. Install httpd
+    yum: name=httpd state=present
+    tags: install_httpd
+    notify: start httpd
