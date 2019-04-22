@@ -1,0 +1,19 @@
+
+
+---
+
+- hosts: all
+  user: ansadm
+  vars: 
+      name: Aditya Kumar Datta
+      org: Vlink India Pvt Ltd
+  become: yes
+  become_method: sudo
+
+  tasks:
+
+  - name: 1. Copy file using variables
+    template: 
+         src: /home/ansadm/ansible_playbooks/template_files/file.txt
+         dest: /home/ansadm
+    tags: template_usage   

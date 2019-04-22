@@ -16,3 +16,7 @@
     service: name=httpd state=started enabled=yes
     tags: start_httpd
 
+  - name: 3. Install mariadb-server
+    yum: name=mariadb-server state=present
+    tags: install_mariadb_server
+
