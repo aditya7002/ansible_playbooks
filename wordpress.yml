@@ -58,3 +58,10 @@
         - http://rpms.remirepo.net/enterprise/remi-release-7.rpm 
       state: present
     tags: install_remi_release
+
+  - name: Installing yum utils
+    yum:
+      name: 
+        - yum-utils
+      state: latest
+    tags: install_yum_utils
