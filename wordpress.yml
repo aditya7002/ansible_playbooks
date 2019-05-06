@@ -42,8 +42,12 @@
     template: src=/home/ansadm/ansible_playbooks/template_files/my.cnf dest=/etc owner=mysql group=mysql
     tags: copy_my_cnf
 
-  - name: Start mariadb service
+  - name: Restart mariadb service
     service: name=mariadb state=restarted
     tags: restart_mariadb
 
-  
+  # Install php 7
+
+  - name: Install epel-release
+    yum: name=epel-release state=present
+    tags: install_epel
