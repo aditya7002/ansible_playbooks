@@ -28,3 +28,22 @@
     service: name=mariadb state=started
     tags: start_mariadb
 
+  - name: update mysql root password for all root accounts
+    mysql_user: name=root host={{ item }} password=vlink config_file=/etc/my.cnf
+    with_items:
+        - "kubernetus"
+        - 127.0.0.1
+        - ::1
+        - localhost
+  
+    tags: reset_root_password
+
+  - name: Copying .my.cnf file to /root location
+    template: src=/home/ansadm/ansible_playbooks/template_files/my.cnf dest=/etc owner=mysql group=mysql
+    tags: copy_my_cnf
+
+  - name: Start mariadb service
+    service: name=mariadb state=restarted
+    tags: restart_mariadb
+
+  
