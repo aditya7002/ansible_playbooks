@@ -51,3 +51,10 @@
   - name: Install epel-release
     yum: name=epel-release state=present
     tags: install_epel
+
+  - name: Install remi-release
+    yum: 
+      name: 
+        - http://rpms.remirepo.net/enterprise/remi-release-7.rpm 
+      state: present
+    tags: install_remi_release
