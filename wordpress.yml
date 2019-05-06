@@ -80,7 +80,7 @@
   - name: Installing PHP 7
     yum:
      name:
-       - php
+       - php73
        - php-mcrypt
        - php-cli
        - php-gd
