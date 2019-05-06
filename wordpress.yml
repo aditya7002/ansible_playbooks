@@ -38,7 +38,7 @@
   
     tags: reset_root_password
 
-  - name: Copying .my.cnf file to /root location
+  - name: Copying my.cnf file to /etc location
     template: src=/home/ansadm/ansible_playbooks/template_files/my.cnf dest=/etc owner=mysql group=mysql
     tags: copy_my_cnf
 
