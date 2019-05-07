@@ -114,3 +114,11 @@
           remote_src: yes
 
     tags: download_extract_wordpress
+
+  - name: Create database for wordpress
+    mysql_db:
+        name: wordpress
+        state: present
+        config_file: /etc/my.cnf
+
+    tags: create_wordpress_db  
