@@ -136,3 +136,12 @@
     notify: restart mariadb
     tags: create_user
 
+  - name: Change wordpress directory permissions
+    file:
+      name: /var/www/html/wordpress
+      owner: apache
+      group: apache
+      mode: '755'
+      recurse: yes
+      state: directory
+    tags: change_directory_permissions
