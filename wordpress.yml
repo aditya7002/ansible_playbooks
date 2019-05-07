@@ -8,6 +8,8 @@
 
   tasks:
 
+  # Install & start apache (httpd)
+
   - name: 1. Install Apache (httpd)
     yum: name=httpd state=present
     tags: install_apache
@@ -15,6 +17,8 @@
   - name: 2. Start httpd service
     service: name=httpd state=started enabled=yes
     tags: start_httpd
+
+  # Install & configure mariadb
 
   - name: 3. Install mariadb-server
     yum:
