@@ -145,3 +145,11 @@
       recurse: yes
       state: directory
     tags: change_directory_permissions
+
+  - name: 'Creating upload directory'
+    file:
+      name: /var/www/html/wordpress/wp-content/uploads
+      group: apache
+      recurse: yes
+      state: directory
+    tags: create_upload_directory
