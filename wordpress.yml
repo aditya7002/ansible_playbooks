@@ -98,6 +98,8 @@
 
     tags: install_php_7
 
+  # Download & install wordpress
+
   - name: Install wget and unzip
     yum: 
      name: ['wget','unzip'] 
