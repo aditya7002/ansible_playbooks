@@ -3,6 +3,8 @@
 
 - hosts: all
   user: ansadm
+  roles: 
+     - database
   become: yes
   become_method: sudo
 
@@ -131,4 +133,6 @@
           config_file: /etc/my.cnf
           state: present
 
-    tags: create_user 
+    notify: restart mariadb
+    tags: create_user
+
