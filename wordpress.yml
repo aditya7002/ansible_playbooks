@@ -121,4 +121,14 @@
         state: present
         config_file: /etc/my.cnf
 
-    tags: create_wordpress_db  
+    tags: create_wordpress_db 
+
+  - name: Create mysql user named wpuser and assign it all privileges to wordpress db
+    mysql_user:
+          name: wpuser
+          password: wordpress
+          priv: wordpress.*:ALL
+          config_file: /etc/my.cnf
+          state: present
+
+    tags: create_user 
