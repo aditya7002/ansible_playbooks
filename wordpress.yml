@@ -93,3 +93,10 @@
      state: present
 
     tags: install_php_7
+
+  - name: Install wget and unzip
+    yum: 
+     name: ['wget','unzip'] 
+     state: latest
+    
+    tags: install_wget_unzip
