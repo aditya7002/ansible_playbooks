@@ -5,6 +5,14 @@
   user: ansadm
   roles: 
      - database
+     - webservers
+  vars:
+     db_name: wordpress
+     db_user: wpuser
+     db_password: wordpress
+     mysql_username: root
+     mysql_password: vlink
+     
   become: yes
   become_method: sudo
 
@@ -34,6 +42,21 @@
     service: name=mariadb state=started
     tags: start_mariadb
 
+  - name: Install epel-release
+    yum: name=epel-release state=present
+    tags: install_epel
+
+  - name: Install python2-pip
+    yum: 
+      name: python2-pip
+      state: present
+    tags: install_python_pip
+
+  - name: Install PyMySQL python module using pip
+    pip:
+      name: PyMySQL
+    tags: install_pymysql 
+
   - name: update mysql root password for all root accounts
     mysql_user: name=root host={{ item }} password=vlink config_file=/etc/my.cnf
     with_items:
@@ -53,10 +76,6 @@
     tags: restart_mariadb
 
   # Install php 7
-
-  - name: Install epel-release
-    yum: name=epel-release state=present
-    tags: install_epel
 
   - name: Install remi-release
     yum: 
@@ -86,7 +105,7 @@
   - name: Installing PHP 7
     yum:
      name:
-       - php73
+       - php
        - php-mcrypt
        - php-cli
        - php-gd
@@ -97,7 +116,8 @@
        - php-fileinfo
 
      state: present
-
+     
+    notify: restart httpd
     tags: install_php_7
 
   # Download & install wordpress
@@ -153,3 +173,21 @@
       recurse: yes
       state: directory
     tags: create_upload_directory
+
+  - name: Copy wp-config-sample.php into wp-config.php
+    copy:
+      src: /var/www/html/wordpress/wp-config-sample.php
+      dest: /var/www/html/wordpress/wp-config.php
+      owner: apache
+      group: apache
+      mode: '755'
+      remote_src: yes
+    tags: copy_file
+
+  - name: Changing the parameters of wp-config.php file
+    template:
+       src: /home/ansadm/ansible_playbooks/template_files/wp-config.php
+       dest: /var/www/html/wordpress 
+    tags: template_copy
+
+# Once done , access wordpress by URL ----> http://172.16.100.6/wordpress/wp-admin/install.php
