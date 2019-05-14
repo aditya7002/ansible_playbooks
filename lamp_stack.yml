@@ -10,7 +10,15 @@
 
   tasks:
 
-  - name: Install apache
-    yum: name=httpd state=present
-    notify: start httpd
-    tags: install_apache
+     - name: Install apache
+       yum: name=httpd state=present
+       notify: start httpd
+       tags: install_apache
+
+     # Running the handler named 'start httpd' at this point only instead of the end of the playbook using below statement
+     - meta: flush_handlers
+
+     - name: Install tmux
+       yum: name=tmux state=present
+       tags: install_tmux
+
