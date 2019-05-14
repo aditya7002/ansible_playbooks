@@ -31,8 +31,17 @@
 
      - meta: flush_handlers
 
-     - name: Install PyMySQL python module
+     - name: Install python2-pip
        yum:
         name: python2-pip
         state: present
+       tags: install_python2-pip
+
+     - name: Install PyMySQL python module
+       pip:
+        name: PyMySQL
        tags: install_pymysql
+
+     #- name: Reset mariadb root password
+     #  mysql_user: name=root password=joomla config_file=/etc/my.cnf
+     #  tags: reset_mariadb_password
