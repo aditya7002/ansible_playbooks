@@ -38,3 +38,13 @@
           dest: /var/www/html
           remote_src: yes
       tags: download_extract_joomla
+
+    - name: Change Joomla directory permissions
+      file:
+        name: /var/www/html
+        owner: apache
+        group: apache
+        mode: '755'
+        recurse: yes
+        state: directory
+      tags: change_directory_permissions
