@@ -6,6 +6,9 @@
   roles:
      - webservers
      - database
+  vars:
+     - mysql_username: root
+     - mysql_password: joomla
   become: yes
   become_method: sudo
 
@@ -42,6 +45,13 @@
         name: PyMySQL
        tags: install_pymysql
 
-     #- name: Reset mariadb root password
-     #  mysql_user: name=root password=joomla config_file=/etc/my.cnf
-     #  tags: reset_mariadb_password
+     - name: Reset mariadb root password
+       mysql_user: name=root password=joomla config_file=/etc/my.cnf
+       tags: reset_mariadb_password
+
+     - name: Copy my.cnf to /etc location
+       template: src=/home/ansadm/ansible_playbooks/template_files/my.cnf dest=/etc owner=mysql group=mysql
+       notify: restart mariadb
+       tags: copy_my_cnf
+
+     - meta: flush_handlers
