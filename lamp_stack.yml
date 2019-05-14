@@ -71,4 +71,9 @@
          state: present
        tags: install_remi_release
     
-     
+     - name: Installing yum utils
+       yum:
+         name: 
+           - yum-utils
+         state: latest
+       tags: install_yum_utils 
