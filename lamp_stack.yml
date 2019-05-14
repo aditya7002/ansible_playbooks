@@ -52,7 +52,7 @@
        tags: install_pymysql
 
      - name: Reset mariadb root password
-       mysql_user: name=root password=joomla config_file=/etc/my.cnf
+       mysql_user: name=root password={{ mysql_password }} config_file=/etc/my.cnf
        tags: reset_mariadb_password
 
      - name: Copy my.cnf to /etc location
