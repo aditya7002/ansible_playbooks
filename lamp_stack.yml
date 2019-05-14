@@ -31,7 +31,8 @@
 
      - meta: flush_handlers
 
-     - name: Install tmux
-       yum: name=tmux state=present
-       tags: install_tmux
-
+     - name: Install PyMySQL python module
+       yum:
+        name: python2-pip
+        state: present
+       tags: install_pymysql
