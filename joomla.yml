@@ -17,3 +17,12 @@
             config_file: /etc/my.cnf
             state: present
       tags: create_joomla_db
+
+    - name: Create mysql user for joomla
+      mysql_user:
+             name: dbuser
+             password: Joomla@123#
+             config_file: /etc/my.cnf
+             priv: 'joomla_db.*:ALL'
+             state: present
+      tags: create_mysql_user
