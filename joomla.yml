@@ -31,3 +31,10 @@
       yum:
         name: ['wget','unzip']
       tags: install_wget_unzip
+
+    - name: Download & extract Joomla file in /var/www/html
+      unarchive:
+          src: https://downloads.joomla.org/cms/joomla3/3-9-6/Joomla_3-9-6-Stable-Full_Package.zip
+          dest: /var/www/html
+          remote_src: yes
+      tags: download_extract_joomla
