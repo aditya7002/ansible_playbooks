@@ -11,8 +11,9 @@
 
   tasks:
 
-    - name: Install tmux
-      yum: 
-        name: tmux
-        state: present
-      tags: install_tmux 
+    - name: Create database for joomla
+      mysql_db:
+            name: joomla_db
+            config_file: /etc/my.cnf
+            state: present
+      tags: create_joomla_db
