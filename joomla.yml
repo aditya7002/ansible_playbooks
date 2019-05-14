@@ -1,0 +1,18 @@
+
+---
+
+- name: Include LAMP stack playbook
+  import_playbook: lamp_stack.yml
+
+- hosts: all
+  user: ansadm
+  become: yes
+  become_method: sudo
+
+  tasks:
+
+    - name: Install tmux
+      yum: 
+        name: tmux
+        state: present
+      tags: install_tmux 
