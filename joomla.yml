@@ -26,3 +26,8 @@
              priv: 'joomla_db.*:ALL'
              state: present
       tags: create_mysql_user
+
+    - name: Install wget and unzip
+      yum:
+        name: ['wget','unzip']
+      tags: install_wget_unzip
