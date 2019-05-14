@@ -5,6 +5,7 @@
   user: ansadm
   roles:
      - webservers
+     - database
   become: yes
   become_method: sudo
 
@@ -16,6 +17,18 @@
        tags: install_apache
 
      # Running the handler named 'start httpd' at this point only instead of the end of the playbook using below statement
+     - meta: flush_handlers
+
+     - name: Install mariadb
+       yum: 
+         name:
+           - mariadb
+           - mariadb-server
+         state: present
+
+       notify: start mariadb
+       tags: install_mariadb
+
      - meta: flush_handlers
 
      - name: Install tmux
