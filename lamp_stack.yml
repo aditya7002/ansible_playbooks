@@ -106,6 +106,7 @@
            - php-ldap
            - php-zip
            - php-fileinfo
+           - php-xml
 
          state: present
      
