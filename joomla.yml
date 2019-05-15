@@ -6,6 +6,10 @@
 
 - hosts: all
   user: ansadm
+  roles:
+     - webservers
+  vars:
+    - override_val: All
   become: yes
   become_method: sudo
 
@@ -48,3 +52,14 @@
         recurse: yes
         state: directory
       tags: change_directory_permissions
+
+    - name: Changing httpd.conf content to include AllowOverride All
+      template:
+           src: /home/ansadm/ansible_playbooks/template_files/httpd.conf
+           dest: /etc/httpd/conf
+           mode: '644'
+           owner: root
+           group: root
+
+      notify: restart httpd
+      tags: change_httpd_conf
