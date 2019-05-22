@@ -63,3 +63,5 @@
 
       notify: restart httpd
       tags: change_httpd_conf
+
+   # Access Joomla interface by URL http://172.16.100.6
