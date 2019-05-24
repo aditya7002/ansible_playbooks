@@ -30,3 +30,11 @@
          path: /opt/tomcat
          state: directory
        tags: create_directory
+
+     - name: Creating user tomcat which would not have login privileges
+       user:
+          name: tomcat
+          group: tomcat
+          home: /opt/tomcat
+          shell: /bin/nologin
+       tags: create_user  
