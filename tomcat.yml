@@ -20,3 +20,8 @@
          state: latest
        tags: install_java_jdk
 
+     - name: Adding group named tomcat
+       group: 
+          name: tomcat
+       tags: add_grp_tomcat
+
