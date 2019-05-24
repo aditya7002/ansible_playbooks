@@ -25,3 +25,8 @@
           name: tomcat
        tags: add_grp_tomcat
 
+     - name: Creating directory '/opt/tomcat'
+       file:
+         path: /opt/tomcat
+         state: directory
+       tags: create_directory
