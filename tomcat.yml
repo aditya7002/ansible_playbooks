@@ -37,4 +37,11 @@
           group: tomcat
           home: /opt/tomcat
           shell: /bin/nologin
-       tags: create_user  
+       tags: create_user 
+
+     - name: Downloading and extracting apache tomcat setup file
+       unarchive:
+             src: http://mirrors.estointernet.in/apache/tomcat/tomcat-9/v9.0.20/bin/apache-tomcat-9.0.20.tar.gz
+             dest: /opt/tomcat   
+             remote_src: yes 
+       tags: extract_tomcat
