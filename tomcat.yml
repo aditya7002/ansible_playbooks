@@ -52,4 +52,5 @@
           path: /opt/tomcat/conf
           owner: root
           group: tomcat
+          mode: u=rwx,g=rwx
        tags: change_group_conf_directory
