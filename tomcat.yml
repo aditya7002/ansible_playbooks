@@ -43,5 +43,6 @@
        unarchive:
              src: http://mirrors.estointernet.in/apache/tomcat/tomcat-9/v9.0.20/bin/apache-tomcat-9.0.20.tar.gz
              dest: /opt/tomcat   
-             remote_src: yes 
+             remote_src: yes
+             extra_opts: [--strip-components=1] 
        tags: extract_tomcat
